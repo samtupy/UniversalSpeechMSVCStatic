@@ -3,6 +3,7 @@
 *.zip
 *.o
 *.a
+*.obj
 *.lib
 *.class
 *.pyc
@@ -10,3 +11,5 @@
 obj/*
 test*
 out*
+.sconsign.dblite
+        

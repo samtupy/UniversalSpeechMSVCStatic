@@ -76,7 +76,7 @@ return result;
 
 export BOOL jfwBrailleA (const char* str) {
 int len = strlen(str);
-char buf[len+20];
+char* buf = malloc(len+20);
 buf[0] = 0;
 strcat(buf, "BrailleString(\"");
 strcat(buf, str);
@@ -85,12 +85,14 @@ char *c = strchr(buf,34), *end = strrchr(buf,34);
 while (++c<end) {
 if (*c==34 || *c==92 || *c<32) *c=32;
 }
-return jfwRunFunctionA(buf);
+BOOL result = jfwRunFunctionA(buf);
+free(buf);
+return result;
 }
 
 export BOOL jfwBrailleW (const wchar_t* str) {
 int len = wcslen(str);
-wchar_t buf[len+20];
+wchar_t* buf = malloc(sizeof(wchar_t)*(len+20));
 buf[0] = 0;
 wcscat(buf, L"BrailleString(\"");
 wcscat(buf, str);
@@ -99,7 +101,9 @@ wchar_t *c = wcschr(buf,34), *end = wcsrchr(buf,34);
 while (++c<end) {
 if (*c==34 || *c==92 || *c<32) *c=32;
 }
-return jfwRunFunctionW(buf);
+BOOL result = jfwRunFunctionW(buf);
+free(buf);
+return result;
 }
 
 export BOOL jfwStopSpeech () {

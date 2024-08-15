@@ -28,7 +28,8 @@ dolphin = NULL;
 
 export BOOL dolLoad (void) {
 dolUnload();
-dolphin = LoadLibraryW(composePath(L"dolapi.dll"));
+dolphin = LoadLibraryW(L"dolapi.dll");
+if (!dolphin) dolphin = LoadLibraryW(composePath(L"dolapi.dll"));
 if (!dolphin) return FALSE;
 DolAccess_GetSystem = GetProcAddress(dolphin, "_DolAccess_GetSystem@0");
 DolAccess_Action = GetProcAddress(dolphin, "_DolAccess_Action@4");

@@ -1,3 +1,18 @@
+# Static library notes by Sam Tupy
+The first commit to this fork is a bit of a rush, I'm just getting things working for now and have succeeded.
+
+I have not made any attempts to fix any warnings so long as it compiles and the warnings do not point to anything nonfatal. In particular the codebase relies on disabling warnings in gcc in order for it's method of dynamic symbol importing to work silently. I'll figure out pragmas for visual studio later.
+
+Though I'll redo it by modifying the composePath function in misc.c later, I modified the way dlls are loaded in order to use the system path, before the library relied on a hardcoded UniversalSpeech.dll name being right next to all the other screen reader dlls.
+
+I also fixed the name of the window eyes engine.
+
+Look in the SConstruct file for the available macros, most importantly for the moment I've disabled SAPI support. I made this fork to add UniversalSpeech to NVGT which uses something else for it's SAPI.
+
+I disclaim rights to these library changes and place them under the same license as UniversalSpeech itself, which is MIT.
+
+Original readme below.
+
 # Universal speech
 
 # 1. Description

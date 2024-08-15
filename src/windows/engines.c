@@ -64,7 +64,7 @@ static int doNothing () { return 1; }
 
 const engine engines[] = {
 { .name=L"Jaws", .isAvailable=jfwIsAvailable, .unload=jfwUnload, .say=jfwSayW, .stop=jfwStopSpeech, .braille=jfwBrailleW, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
-{ .name=L"Windows eye", .isAvailable=weIsAvailable, .unload=weUnload, .say=weSayW, .stop=weStopSpeech, .braille=weBrailleW, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
+{ .name=L"Window Eyes", .isAvailable=weIsAvailable, .unload=weUnload, .say=weSayW, .stop=weStopSpeech, .braille=weBrailleW, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
 { .name=L"NVDA", .isAvailable=nvdaIsAvailable, .unload=nvdaUnload, .say=nvdaSayW, .braille=nvdaBraille, .stop=nvdaStopSpeech, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
 { .name=L"System access", .isAvailable=saIsAvailable, .unload=saUnload, .say=saSayW, .stop=saStopSpeech, .braille=saBrailleW, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
 { .name=L"Supernova", .isAvailable=dolIsAvailable, .unload=dolUnload, .say=dolSay, .stop=dolStopSpeech, .braille=doNothing, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
@@ -72,7 +72,9 @@ const engine engines[] = {
 { .name=L"ZDSR", .isAvailable=zdsrIsAvailable, .unload=zdsrUnload, .say=zdsrSayW, .stop=zdsrStopSpeech, .braille=doNothing, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
 { .name=L"Cobra", .isAvailable=cbrIsAvailable, .unload=cbrUnload, .say=cbrSayW, .stop=cbrStopSpeech, .braille=cbrBrailleW, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
 { .name=L"Narrator", .isAvailable=narIsAvailable, .unload=doNothing, .say=doNothing, .stop=doNothing, .braille=doNothing, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
+#ifndef UNIVERSAL_SPEECH_NO_SAPI
 { .name=L"SAPI5", .isAvailable=sapiIsAvailable, .unload=sapiUnload, .say=sapiSayW, .stop=sapiStopSpeech, .braille=doNothing, .setValue=sapiSetValue, .getValue=sapiGetValue, .setString=NULL, .getString=sapiGetString  },
+#endif
 { .name=NULL, .isAvailable=NULL, .unload=NULL, .stop=NULL, .say=NULL, .braille=NULL, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL }
 };
 const int numEngines = sizeof(engines)/sizeof(engine) -1;

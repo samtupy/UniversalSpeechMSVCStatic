@@ -83,21 +83,25 @@ BOOL GetProcessVersionInfo (const char* pfn, int mode, char* buf, int buflen) {
 DWORD dwHandle = 0, dwSize=0;
 dwSize = GetFileVersionInfoSize(pfn, &dwHandle);
 if (dwSize<=0) return FALSE;
-char verbuf[dwSize];
-if (!GetFileVersionInfo(pfn, dwHandle, dwSize, verbuf)) return FALSE;
+char* verbuf=malloc(dwSize);
+if (!GetFileVersionInfo(pfn, dwHandle, dwSize, verbuf)) { free(verbuf); return FALSE; }
 switch(mode) {
 case 0 : case 1 : {
 VS_FIXEDFILEINFO* ver = NULL;
-if (!VerQueryValue(verbuf, "\\", &ver, &dwSize)) return FALSE;
+if (!VerQueryValue(verbuf, "\\", &ver, &dwSize)) { free(verbuf); return FALSE; }
 if (mode==0) memcpy(buf, ver, dwSize);
 else snprintf(buf, buflen, "%d.%d.%d.%d\r\n", HIWORD(ver->dwProductVersionMS), LOWORD(ver->dwProductVersionMS), HIWORD(ver->dwProductVersionLS), LOWORD(ver->dwProductVersionLS));
+free(verbuf);
 return TRUE;
 }
 case 2 : {
 char* ver = NULL;
-if (!VerGetField(verbuf, "ProductVersion", &ver, &dwSize)) return FALSE;
+if (!VerGetField(verbuf, "ProductVersion", &ver, &dwSize)) { free(verbuf); return FALSE; }
 strncpy(buf, ver, buflen);
+free(verbuf);
 return TRUE;
 }
-default: return FALSE;
-}}
+default: { free(verbuf); return FALSE; }
+}
+free(verbuf);
+}

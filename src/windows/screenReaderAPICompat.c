@@ -8,8 +8,6 @@ Please refer to the readme file provided with the package for more information.
 #include<windows.h>
 #include "../../include/UniversalSpeech.h"
 
-#undef export
-#define export __declspec(dllexport) __stdcall
 
 extern const int numEngines;
 
@@ -83,7 +81,7 @@ return speechGetValue(SP_ENABLE_NATIVE_SPEECH);
 }
 
 export BOOL sapiEnable (BOOL enable) {
-speechSetValue(SP_ENABLE_NATIVE_SPEECH, enable);
+return speechSetValue(SP_ENABLE_NATIVE_SPEECH, enable);
 }
 
 export int getSupportedScreenReadersCount (void) {

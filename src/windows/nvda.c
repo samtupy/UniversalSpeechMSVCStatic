@@ -13,10 +13,10 @@ BOOL __declspec(dllexport) FindProcess (const char* needle, char* buf, size_t bu
 BOOL GetProcessVersionInfo (const char* pfn, int mode, char* buf, int buflen);
 
 static HINSTANCE nvda = NULL;
-static int(*__stdcall nvdaController_speakText)(const wchar_t*)  = NULL;
-static int(*__stdcall nvdaController_cancelSpeech)(void) = NULL;
-static int(*__stdcall nvdaController_testIfRunning)(void) = NULL;
-static int(*__stdcall nvdaController_brailleMessage)(const wchar_t*) = NULL;
+static int(*nvdaController_speakText)(const wchar_t*)  = NULL;
+static int(*nvdaController_cancelSpeech)(void) = NULL;
+static int(*nvdaController_testIfRunning)(void) = NULL;
+static int(*nvdaController_brailleMessage)(const wchar_t*) = NULL;
 
 export void nvdaUnload (void) {
 nvdaController_cancelSpeech = NULL;
@@ -29,7 +29,11 @@ nvda = NULL;
 
 export BOOL nvdaLoad (void) {
 nvdaUnload();
-nvda = LoadLibraryW(composePath(L"nvdaControllerClient.dll"));
+nvda = LoadLibraryW(L"nvdaControllerClient.dll");
+if (!nvda) nvda = LoadLibraryW(L"nvdaControllerClient64.dll");
+if (!nvda) nvda = LoadLibraryW(L"nvdaControllerClient32.dll");
+if (!nvda) nvda = LoadLibraryW(composePath(L"nvdaControllerClient.dll"));
+if (!nvda) nvda = LoadLibraryW(composePath(L"nvdaControllerClient64.dll"));
 if (!nvda) nvda = LoadLibraryW(composePath(L"nvdaControllerClient32.dll"));
 if (!nvda) return FALSE;
 #define LOAD(f) { f=GetProcAddress(nvda,#f); if (!f) { nvdaUnload(); return FALSE; }}

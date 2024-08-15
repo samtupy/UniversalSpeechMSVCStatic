@@ -27,7 +27,8 @@ zdsr = NULL;
 
 export BOOL zdsrLoad (void) {
 zdsrUnload();
-zdsr = LoadLibraryW(composePath(L"zdsrapi.dll"));
+zdsr = LoadLibraryW(L"zdsrapi.dll");
+if (!zdsr) zdsr = LoadLibraryW(composePath(L"zdsrapi.dll"));
 if (!zdsr) return FALSE;
 #define LOAD(f) { f=GetProcAddress(zdsr,#f); if (!f) { zdsrUnload(); return FALSE; }}
 LOAD(InitTTS) LOAD(GetSpeakState)
