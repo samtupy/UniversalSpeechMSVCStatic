@@ -63,8 +63,8 @@ export int narIsAvailable (void) ;
 static int doNothing () { return 1; }
 
 const engine engines[] = {
-{ .name=L"Jaws", .isAvailable=jfwIsAvailable, .unload=jfwUnload, .say=jfwSayW, .stop=jfwStopSpeech, .braille=jfwBrailleW, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
-{ .name=L"Window Eyes", .isAvailable=weIsAvailable, .unload=weUnload, .say=weSayW, .stop=weStopSpeech, .braille=weBrailleW, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
+{ .name=L"JAWS", .isAvailable=jfwIsAvailable, .unload=jfwUnload, .say=jfwSayW, .stop=jfwStopSpeech, .braille=jfwBrailleW, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
+{ .name=L"Window eyes", .isAvailable=weIsAvailable, .unload=weUnload, .say=weSayW, .stop=weStopSpeech, .braille=weBrailleW, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
 { .name=L"NVDA", .isAvailable=nvdaIsAvailable, .unload=nvdaUnload, .say=nvdaSayW, .braille=nvdaBraille, .stop=nvdaStopSpeech, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
 { .name=L"System access", .isAvailable=saIsAvailable, .unload=saUnload, .say=saSayW, .stop=saStopSpeech, .braille=saBrailleW, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
 { .name=L"Supernova", .isAvailable=dolIsAvailable, .unload=dolUnload, .say=dolSay, .stop=dolStopSpeech, .braille=doNothing, .setValue=NULL, .getValue=NULL, .setString=NULL, .getString=NULL  },
