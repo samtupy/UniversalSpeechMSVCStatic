@@ -2,5 +2,7 @@
 
 windows_sources = ["cobra.c", "disphelper.c", "dolphin.c", "encoding-conversion.c", "engines.c", "jaws.c", "misc.c", "narrator.c", "nvda.c", "processlist.c", "systemaccess.c", "windows-eyes.c", "zdsr.c", "zoomtext.c", "zoomtext-guid.c"]
 sources = ["obj/windows/" + i for i in windows_sources] + ["obj/UniversalSpeech.c"]
+debug_def = "DEBUG" if ARGUMENTS.get("debug", "0") == "1" else "NDEBUG"
+runtime_lib = "/MTd" if ARGUMENTS.get("debug", "0") == "1" else "/MT"
 VariantDir("obj", "src", duplicate = False)
-StaticLibrary("UniversalSpeechStatic", sources, CPPDEFINES = ["RELEASE", "UNIVERSAL_SPEECH_STATIC", "UNIVERSAL_SPEECH_NO_SAPI", "UNIVERSAL_SPEECH_BUILDING"])
+StaticLibrary("UniversalSpeechStatic", sources, CPPFLAGS = [runtime_lib], CPPDEFINES = [debug_def, "UNIVERSAL_SPEECH_STATIC", "UNIVERSAL_SPEECH_NO_SAPI", "UNIVERSAL_SPEECH_BUILDING"])
